@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Projects/Fog/scene_fog.unity
+    guid: 4926e1a50ee5e1a44a5a263903d30d97
   m_configObjects: {}
