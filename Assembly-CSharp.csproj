@@ -41,6 +41,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <None Include="Assets\Projects\Billboard\shader_billboard.shader" />
      <None Include="Assets\Projects\PBR\shader_pbr.shader" />
      <None Include="Assets\Projects\Fog\shader_fog.shader" />
      <Reference Include="UnityEngine">

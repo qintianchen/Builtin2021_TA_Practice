@@ -120,7 +120,6 @@ Shader "Custom/PBR/shader_pbr"
                 float3 specularColor = (f * d * g) / (4 * nv * nl + 0.001);
 
                 float3 finalColor = (diffuseColor + specularColor) * nl;
-                
                 return half4(finalColor, 1);
             }
             ENDCG
