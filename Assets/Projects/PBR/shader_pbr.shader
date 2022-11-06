@@ -51,28 +51,43 @@ Shader "Custom/PBR/shader_pbr"
                 return o;
             }
 
-            float3 GetFresnelTerm(float3 f0, float VDotH)
+            float3 FresnelSchlick(float cosTheta, float3 F0)
             {
-                float3 a = (float3)1 - f0;
-                float b = pow(1 - VDotH, 5);
-                // float b= 0;
-                
-                return f0 + a * b;
+                return F0 + (1.0 - F0) * pow(1.0 - cosTheta, 5.0);
+            } 
+
+            float DistributionGGX(float3 N, float3 H, float roughness)
+            {
+                float a      = roughness*roughness;
+                float a2     = a*a;
+                float NdotH  = max(dot(N, H), 0.0);
+                float NdotH2 = NdotH*NdotH;
+
+                float nom   = a2;
+                float denom = (NdotH2 * (a2 - 1.0) + 1.0);
+                denom = UNITY_PI * denom * denom;
+
+                return nom / denom;
             }
 
-            float GetNDFTerm(float roughness, float NDotH)
+            float GeometrySchlickGGX(float NdotV, float roughness)
             {
-                float r2 = roughness * roughness;
-	            float d = (NDotH * r2 - NDotH) * NDotH + 1.0;
-	            return r2 / (d * d * UNITY_PI);
-            }
+                float r = (roughness + 1.0);
+                float k = (r*r) / 8.0;
 
-            float GetVisibilityTerm(float3 roughness, float NDotL, float NDotV)
+                float nom   = NdotV;
+                float denom = NdotV * (1.0 - k) + k;
+
+                return nom / denom;
+            }
+            float GeometrySmith(float3 N, float3 V, float3 L, float roughness)
             {
-                float r2 = roughness * roughness;
-	            float gv = NDotL * sqrt(NDotV * (NDotV - NDotV * r2) + r2);
-	            float gl = NDotV * sqrt(NDotL * (NDotL - NDotL * r2) + r2);
-	            return 0.5 / max(gv + gl, 0.00001);
+                float NdotV = max(dot(N, V), 0.0);
+                float NdotL = max(dot(N, L), 0.0);
+                float ggx2  = GeometrySchlickGGX(NdotV, roughness);
+                float ggx1  = GeometrySchlickGGX(NdotL, roughness);
+
+                return ggx1 * ggx2;
             }
 
             half4 frag (v2f i) : SV_Target
@@ -86,25 +101,25 @@ Shader "Custom/PBR/shader_pbr"
                 float3 viewDirWS = normalize(cameraPositionWS - positionWS);
                 float3 halfDir = normalize(lightDirWS + viewDirWS);
                 float3 albedo = tex2D(_MainTex, uv);
+                albedo = float3(1, 0, 0);
 
                 float vh = saturate(dot(viewDirWS, halfDir));
                 float nv = saturate(dot(normalWS, viewDirWS));
                 float nl = saturate(dot(normalWS, lightDirWS));
                 float nh = saturate(dot(normalWS, halfDir));
 
-                float3 f0 = lerp(unity_ColorSpaceDielectricSpec, (half4)1, _Metallic); // 金属性越强，各个分量的反射率越高
-                float3 diffuseColor = lerp(albedo, 0, _Metallic); // 金属性越强，漫反射的量越少
-                
+                float3 f0 = unity_ColorSpaceDielectricSpec;
+                float3 ks = f0;
+                float3 kd = ((float3)1 - ks) * (1 - _Metallic); // 金属性越强，漫反射的程度越弱
                 float roughness = _Roughness;
+                float d = DistributionGGX(normalWS, halfDir, roughness);
+                float g = GeometrySmith(normalWS, viewDirWS, lightDirWS, roughness);
+                float3 f = FresnelSchlick(f0, nv);
 
-                float d = GetNDFTerm(roughness, nh);
-                float g = GetVisibilityTerm(roughness, nl, nv);
-                float3 f = GetFresnelTerm(f0, vh);
-         
-                diffuseColor *= saturate(dot(normalWS, lightDirWS));
-                float3 specularColor = f * d * g * UNITY_PI * nl;
+                float3 diffuseColor = kd * albedo / UNITY_PI;
+                float3 specularColor = (f * d * g) / (4 * nv * nl + 0.001);
 
-                float3 finalColor = (diffuseColor + specularColor) * 0.4;
+                float3 finalColor = (diffuseColor + specularColor) * nl;
                 
                 return half4(finalColor, 1);
             }
