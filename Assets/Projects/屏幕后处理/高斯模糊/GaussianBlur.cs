@@ -9,26 +9,6 @@ public class GaussianBlur : MonoBehaviour
     [Range(0.2f, 3.0f)] public float    blurSpread = 0.6f;
     [Range(1, 8)]       public int      downSample = 2;
     private static readonly    int      s_BlurSize = Shader.PropertyToID("_BlurSize");
-    
-    // private void OnRenderImage(RenderTexture src, RenderTexture dest)
-    // {
-    //     if (material != null)
-    //     {
-    //         int width  = src.width;
-    //         int height = src.height;
-    //         
-    //         var buffer0 = RenderTexture.GetTemporary(width, height, 0);
-    //         // buffer0.filterMode = FilterMode.Bilinear;
-    //         
-    //         Graphics.Blit(src, buffer0, material, 0);
-    //         Graphics.Blit(buffer0, dest, material, 1);
-    //         RenderTexture.ReleaseTemporary(buffer0);
-    //     }
-    //     else
-    //     {
-    //         Graphics.Blit(src, dest);
-    //     }
-    // }
 
     private void OnRenderImage(RenderTexture src, RenderTexture dest)
     {

@@ -44,12 +44,17 @@
      <Compile Include="Assets\Projects\屏幕后处理\颜色调节\BrightnessSaturationAndContrast.cs" />
      <Compile Include="Assets\Projects\屏幕后处理\边缘检测\EdgeDetection.cs" />
      <Compile Include="Assets\Projects\屏幕后处理\高斯模糊\GaussianBlur.cs" />
+     <Compile Include="Assets\Projects\屏幕后处理\泛光\Bloom.cs" />
+     <Compile Include="Assets\Packages\_Barking_Dog\Common Scripts\Turn_Move.cs" />
+     <Compile Include="Assets\Packages\_Barking_Dog\Common Scripts\MouseLook.cs" />
      <None Include="Assets\Projects\顶点动画\Billboard\shader_billboard.shader" />
      <None Include="Assets\Projects\PBR\shader_pbr.shader" />
+     <None Include="Assets\Projects\屏幕后处理\泛光\shader_bloom.shader" />
      <None Include="Assets\Projects\屏幕后处理\颜色调节\shader_brightnesssaturationandcontrast.shader" />
      <None Include="Assets\Projects\屏幕后处理\边缘检测\shader_edgedetection.shader" />
      <None Include="Assets\Projects\Fog\shader_fog.shader" />
      <None Include="Assets\Projects\屏幕后处理\高斯模糊\shader_gaussianblur.shader" />
+     <None Include="Assets\Packages\_Barking_Dog\Readme_Please.txt" />
      <Reference Include="UnityEngine">
      <HintPath>D:\Softwares\Unity 2021.3.10f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
      </Reference>

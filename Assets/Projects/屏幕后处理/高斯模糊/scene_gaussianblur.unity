@@ -278,9 +278,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 92828b3322a2ff3479e546f310e0f4fb, type: 2}
-  iterations: 4
-  blurSpread: 3
-  downSample: 1
+  iterations: 3
+  blurSpread: 0.6
+  downSample: 2
 --- !u!1 &1854810941
 GameObject:
   m_ObjectHideFlags: 0

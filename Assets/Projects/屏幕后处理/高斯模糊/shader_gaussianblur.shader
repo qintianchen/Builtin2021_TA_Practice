@@ -79,6 +79,7 @@ Shader "Custom/PostProcessing/gaussianblur"
         ZTest Always
         Cull Off
         ZWrite Off
+        // 高斯函数具有可分离性，即 G(x,y)=G(x)*G(y)，所以我们可以将二维的高斯函数拆成两个一维的高斯函数分别做计算，这样计算的复杂度会从 N^2 变为 N，N为高斯卷积核的大小
         Pass
         {
             NAME "GAUSSIAN_BLUR_VERTICAL"
