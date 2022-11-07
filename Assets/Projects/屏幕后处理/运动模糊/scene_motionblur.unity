@@ -2767,13 +2767,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009847230}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 606c3549f785cd34bbb6d9b1ec40677e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: caa5ef26b1552e44295f014ddbc9dfb4, type: 2}
-  blurAmount: 0.5
+  blurAmount: 0.8
 --- !u!1 &5723726668490935893
 GameObject:
   m_ObjectHideFlags: 0
@@ -3046,6 +3046,18 @@ PrefabInstance:
     - target: {fileID: 118030, guid: 72662286a75375c4e907bc20dd734a99, type: 3}
       propertyPath: m_Name
       value: OldCar
+      objectReference: {fileID: 0}
+    - target: {fileID: 119316, guid: 72662286a75375c4e907bc20dd734a99, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 178580, guid: 72662286a75375c4e907bc20dd734a99, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 181500, guid: 72662286a75375c4e907bc20dd734a99, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 401344, guid: 72662286a75375c4e907bc20dd734a99, type: 3}
       propertyPath: m_RootOrder

@@ -49,10 +49,12 @@ Shader "Custom/PostProcessing/motionblur"
         ZTest Always
         Cull Off
         ZWrite Off
-        // 高斯函数具有可分离性，即 G(x,y)=G(x)*G(y)，所以我们可以将二维的高斯函数拆成两个一维的高斯函数分别做计算，这样计算的复杂度会从 N^2 变为 N，N为高斯卷积核的大小
-        // 总得来说，Bloom 分三步：分离亮度图，高斯模糊亮度图，混合亮度图到原图
+        // Alpha 和 RGB 分开渲染是对于一些具有透明物体的场景来说比较有用
+        // 假设我们只用一个 Pass，即在 RGB Pass 里面就将 Alpha 写入，此时 alpha 的最终值会受到 SrcAlpha 和 OneMinusSrcAlpha 的影响
+        // 但是我们只想要保留原图中的 Alpha 值
         Pass
         {
+            NAME "MOTIONBLUR_RGB"
             Blend SrcAlpha OneMinusSrcAlpha
             ColorMask RGB
             
@@ -63,6 +65,8 @@ Shader "Custom/PostProcessing/motionblur"
         }
         Pass
         {
+            NAME "MOTIONBLUR_A"
+            
             Blend One Zero
             ColorMask A
             

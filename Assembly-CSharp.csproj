@@ -55,6 +55,7 @@
      <Compile Include="Assets\Packages\RCK 2.3\Scripts\PoliceLights.cs" />
      <Compile Include="Assets\Packages\RCK 2.3\Scripts\VehicleControl.cs" />
      <Compile Include="Assets\Packages\RCK 2.3\Scripts\VehicleDamage.cs" />
+     <Compile Include="Assets\Projects\屏幕后处理\运动模糊\MotionBlurWithDepthTexture.cs" />
      <None Include="Assets\Packages\RCK 2.3\Shaders\ReflectionBlurFresnel.shader" />
      <None Include="Assets\Packages\RCK 2.3\Standard Assets\Projectors\Guidelines.txt" />
      <None Include="Assets\Projects\顶点动画\Billboard\shader_billboard.shader" />
@@ -62,6 +63,7 @@
      <None Include="Assets\Projects\屏幕后处理\泛光\shader_bloom.shader" />
      <None Include="Assets\Packages\RCK 2.3\Standard Assets\Projectors\Sources\Shaders\Projector Light.shader" />
      <None Include="Assets\Packages\RCK 2.3\Shaders\TransparentRef.shader" />
+     <None Include="Assets\Projects\屏幕后处理\运动模糊\shader_motionblur2.shader" />
      <None Include="Assets\Packages\RCK 2.3\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
      <None Include="Assets\Packages\RCK 2.3\Skidmarks\Skidmarks Essentials\Skidmarks.shader" />
      <None Include="Assets\Projects\屏幕后处理\颜色调节\shader_brightnesssaturationandcontrast.shader" />
