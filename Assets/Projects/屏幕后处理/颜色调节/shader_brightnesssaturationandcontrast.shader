@@ -67,8 +67,7 @@ Shader "Custom/PostProcessing/brightnesssaturationandcontrast"
                 finalColor *= _Brightness;
 
                 // Apply Saturation
-                float luminance = 0.2125 * originalColor.r + 0.7154 * originalColor.g + 0.0721 * originalColor.b;
-                float3 luminanceColor = luminance;
+                float3 luminanceColor = Luminance(originalColor);
                 finalColor = lerp(luminanceColor, finalColor, _Saturation);
                 
                 // Apply Contrast
