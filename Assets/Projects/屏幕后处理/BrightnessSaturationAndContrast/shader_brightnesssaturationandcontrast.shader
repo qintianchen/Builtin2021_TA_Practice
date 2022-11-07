@@ -1,4 +1,4 @@
-Shader "Custom/PostProcessing/shader_brightnesssaturationandcontrast"
+Shader "Custom/PostProcessing/brightnesssaturationandcontrast"
 {
     Properties
     {
