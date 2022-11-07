@@ -936,6 +936,11 @@ PrefabInstance:
       objectReference: {fileID: 1714723707}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8512d52775bf95340b741dfb9552c938, type: 3}
+--- !u!20 &5723726667698487836 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2000000, guid: 8512d52775bf95340b741dfb9552c938, type: 3}
+  m_PrefabInstance: {fileID: 5723726667698487835}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5723726667849264299
 GameObject:
   m_ObjectHideFlags: 0
@@ -2774,6 +2779,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: caa5ef26b1552e44295f014ddbc9dfb4, type: 2}
   blurAmount: 0.8
+--- !u!114 &5723726668481719013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009847230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ee1a6cd9319674eb862bba89f38787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: c6b2239a8c2af8048942c426ad69c605, type: 2}
+  blurSize: 1
+  camera: {fileID: 5723726667698487836}
 --- !u!1 &5723726668490935893
 GameObject:
   m_ObjectHideFlags: 0
