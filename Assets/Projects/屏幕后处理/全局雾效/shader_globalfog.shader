@@ -26,7 +26,6 @@ Shader "Custom/PostProcessing/globalfog"
         struct v2f
         {
             float4 pos : SV_POSITION;
-            float3 worldPos : TEXCOORD3;
             half2 uv : TEXCOORD0;
             half2 uv_depth : TEXCOORD1;
             float4 interpolatedRay : TEXCOORD2;
@@ -36,7 +35,6 @@ Shader "Custom/PostProcessing/globalfog"
         {
             v2f o;
             o.pos = UnityObjectToClipPos(v.vertex);
-            o.worldPos = mul(unity_ObjectToWorld, v.vertex);
             
             o.uv = v.texcoord;
             o.uv_depth = v.texcoord;

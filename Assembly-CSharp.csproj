@@ -58,6 +58,7 @@
      <Compile Include="Assets\Packages\RCK 2.3\Skidmarks\Skidmarks Essentials\Skidmarks.cs" />
      <Compile Include="Assets\Packages\RCK 2.3\Scripts\VehicleCamera.cs" />
      <Compile Include="Assets\Projects\屏幕后处理\边缘检测\EdgeDetectionWithNormalAndDepth.cs" />
+     <Compile Include="Assets\Projects\屏幕后处理\全局雾效\VerticalFog.cs" />
      <None Include="Assets\Packages\RCK 2.3\Shaders\ReflectionBlurFresnel.shader" />
      <None Include="Assets\Projects\屏幕后处理\边缘检测\shader_edgedetectionwithnormalanddepth.shader" />
      <None Include="Assets\Packages\RCK 2.3\Standard Assets\Projectors\Guidelines.txt" />
@@ -69,6 +70,7 @@
      <None Include="Assets\Projects\屏幕后处理\运动模糊\shader_motionblur2.shader" />
      <None Include="Assets\Packages\RCK 2.3\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
      <None Include="Assets\Packages\RCK 2.3\Skidmarks\Skidmarks Essentials\Skidmarks.shader" />
+     <None Include="Assets\Projects\屏幕后处理\全局雾效\shader_verticalfog.shader" />
      <None Include="Assets\Projects\屏幕后处理\颜色调节\shader_brightnesssaturationandcontrast.shader" />
      <None Include="Assets\Projects\屏幕后处理\边缘检测\shader_edgedetection.shader" />
      <None Include="Assets\Projects\Fog\shader_fog.shader" />
