@@ -57,6 +57,7 @@
      <Compile Include="Assets\Packages\RCK 2.3\Skidmarks\Skidmarks Essentials\Skidmarks.cs" />
      <Compile Include="Assets\Packages\RCK 2.3\Scripts\VehicleCamera.cs" />
      <Compile Include="Assets\Projects\屏幕后处理\全局雾效\GlobalFog.cs" />
+     <Compile Include="Assets\Projects\屏幕后处理\全局雾效\Test.cs" />
      <None Include="Assets\Packages\RCK 2.3\Shaders\ReflectionBlurFresnel.shader" />
      <None Include="Assets\Packages\RCK 2.3\Standard Assets\Projectors\Guidelines.txt" />
      <None Include="Assets\Projects\顶点动画\Billboard\shader_billboard.shader" />
