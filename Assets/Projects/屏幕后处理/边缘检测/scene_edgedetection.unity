@@ -192,6 +192,7 @@ GameObject:
   - component: {fileID: 1436303710}
   - component: {fileID: 1436303709}
   - component: {fileID: 1436303712}
+  - component: {fileID: 1436303713}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -272,16 +273,35 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436303708}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0198e74dcd2fdfd41bdb83399a8145e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: aca8b2a6997c8a64a8b4994028f47ecd, type: 2}
   edgeSize: 2
-  edgeOnly: 0.811
+  edgeOnly: 1
   edgeColor: {r: 1, g: 1, b: 1, a: 1}
   backgroundColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &1436303713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436303708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9f2bb95d5c84ef40a36c973d789f2b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 572095bc0f2ba194a823649f3fdda202, type: 2}
+  edgeOnly: 1
+  edgeColor: {r: 1, g: 1, b: 1, a: 1}
+  backgroundColor: {r: 0, g: 0, b: 0, a: 1}
+  sampleDistance: 1
+  sensitivityDepth: 0.5
+  sensitivityNormal: 0.5
 --- !u!1 &1854810941
 GameObject:
   m_ObjectHideFlags: 0

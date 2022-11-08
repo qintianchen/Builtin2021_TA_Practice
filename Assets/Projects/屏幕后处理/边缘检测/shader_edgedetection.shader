@@ -4,7 +4,7 @@ Shader "Custom/PostProcessing/edgedetection"
     {
         _MainTex ("Texture", 2D) = "white" {}
         _EdgeSize("EdgeSize", Float) = 1.0
-        _EdgeSize("_EdgeOnly", Float) = 1.0
+        _EdgeSize("EdgeOnly", Float) = 1.0
         _EdgeColor("EdgeColor", Color) = (0, 0, 0, 1)
         _BackgroundColor("BackgroundColor", Color) = (1, 1, 1, 1)
     }
