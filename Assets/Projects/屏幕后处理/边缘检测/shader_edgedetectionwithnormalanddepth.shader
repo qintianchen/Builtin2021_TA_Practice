@@ -4,7 +4,7 @@ Shader "Custom/PostProcessing/edgedetectionwithnormalanddepth"
     {
         _MainTex ("Texture", 2D) = "white" {}
         _EdgeOnly("EdgeOnly", Float) = 1.0
-        _EdgeColor("EdgeColor", Float) = 1.0
+        _EdgeColor("EdgeColor", Color) = (1, 1, 1, 1)
         _BackgroundColor("BackgroundColor", Color) = (1, 1, 1, 1)
         _SampleDistance("SampleDistance", Float) = 1
         _Sensitivity ("Sensitivity", Vector) = (1, 1, 1,1 )
