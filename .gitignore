@@ -4,3 +4,4 @@ Temp
 UserSettings
 obj
 **/*.csproj
+**/*.sln
