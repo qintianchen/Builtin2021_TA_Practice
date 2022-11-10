@@ -278,8 +278,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 8206a7b6bdebd094e9da226e00929d7a, type: 2}
-  fogDensity: 2.181
-  fogColor: {r: 0.27328897, g: 0.11894804, b: 0.31132078, a: 1}
+  fogDensity: 2.155
+  fogColor: {r: 0.6415094, g: 0.6159948, b: 0, a: 1}
   fogStart: 0
 --- !u!1 &1854810941
 GameObject:

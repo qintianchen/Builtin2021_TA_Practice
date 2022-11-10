@@ -39,7 +39,7 @@ Shader "Custom/PostProcessing/edgedetectionwithnormalanddepth"
             sampler2D _CameraDepthNormalsTexture;
             float4 _MainTex_ST;
             float4 _MainTex_TexelSize;
-            float _EdgeOnly;
+            float _EdgeOnly;    
             float4 _EdgeColor;
             float4 _BackgroundColor;
             float _SampleDistance;
