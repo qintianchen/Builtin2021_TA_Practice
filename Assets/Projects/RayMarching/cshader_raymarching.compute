@@ -1,0 +1,22 @@
+#pragma kernel CSMain
+
+RWTexture2D<float4> Destination;
+
+struct Ray
+{
+    float3 positionWS;
+    float3 directionWS;
+};
+
+Ray GetRayFromScreenPosition(float2 positionSS)
+{
+    
+}
+
+[numthreads(8, 8, 1)]
+void CSMain(uint3 id: SV_DispatchThreadID)
+{
+    uint screenWidth, screenHeight;
+    Destination.GetDimensions(screenWidth, screenHeight);
+    Ray ray = GetRayFromScreenPosition(id.xy);
+}
