@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: mat_volumelightingandshadow
-  m_Shader: {fileID: 4800000, guid: a6b9350a58eed884193f86d3c4cfbfdb, type: 3}
+  m_Name: mat_sphereintersect_shader
+  m_Shader: {fileID: 4800000, guid: 0902a74ac39722443a36aef4a74f7d8e, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -58,10 +58,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Aspect: 2
+    - _AtmosphereRadius: 6
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _FOV: 60
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -69,6 +72,8 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _PlanetRadius: 3.98
+    - _Radius: 4
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

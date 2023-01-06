@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: 1b753ebf3fc9cfb499a4321937c726e2
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _MainTex: {instanceID: 0}
+  - _Tex1: {instanceID: 0}
+  - _Tex2: {instanceID: 0}
+  - _Tex3: {instanceID: 0}
+  - _Tex4: {fileID: 2800000, guid: 5be517d7abef9514b9f13d94e5340219, type: 3}
+  - _Tex5: {fileID: 2800000, guid: 912fd71cbf4cbe140b4f240bedbc1f3e, type: 3}
+  - _Tex6: {fileID: 2800000, guid: 56ca09b5854db134983e151a949d54c6, type: 3}
+  - _Tex7: {fileID: 2800000, guid: fd194f75fe3d7ca4488fa775ae832fd8, type: 3}
+  - _Tex8: {fileID: 2800000, guid: 56ca09b5854db134983e151a949d54c6, type: 3}
+  - _Tex9: {fileID: 2800000, guid: 01dd9eb734b48ee44ad0ca0d3b3bc9c0, type: 3}
+  - _Tex10: {fileID: 2800000, guid: 8a81a15d15fd7904ab53f4efd6871528, type: 3}
+  - _Tex11: {instanceID: 0}
+  - _Tex12: {instanceID: 0}
+  - _Tex13: {instanceID: 0}
+  - _Tex14: {instanceID: 0}
+  - _Tex15: {instanceID: 0}
+  - _Tex16: {instanceID: 0}
+  - _Tex17: {instanceID: 0}
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
