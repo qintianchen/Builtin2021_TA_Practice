@@ -34,13 +34,13 @@ Shader "Custom/shader_depth_1"
             sampler2D _MainTex;
             float4 _MainTex_ST;
 
-            v2f vert (appdata v)
+            v2f vert (appdata input)
             {
                 v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.vertex = UnityObjectToClipPos(input.vertex);
                 o.positionCS = o.vertex;
-                o.positionVS = mul(UNITY_MATRIX_MV, v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.positionVS = mul(UNITY_MATRIX_MV, input.vertex);
+                o.uv = TRANSFORM_TEX(input.uv, _MainTex);
                 return o;
             }
 

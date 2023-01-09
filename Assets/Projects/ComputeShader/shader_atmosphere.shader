@@ -36,13 +36,13 @@ Shader "Hidden/Atmosphere"
 					float3 viewVector : TEXCOORD1;
 			};
 
-			v2f vert (appdata v) {
+			v2f vert (appdata input) {
 					v2f output;
-					output.pos = UnityObjectToClipPos(v.vertex);
-					output.uv = v.uv;
+					output.pos = UnityObjectToClipPos(input.vertex);
+					output.uv = input.uv;
 					// Camera space matches OpenGL convention where cam forward is -z. In unity forward is positive z.
 					// (https://docs.unity3d.com/ScriptReference/Camera-cameraToWorldMatrix.html)
-					float3 viewVector = mul(unity_CameraInvProjection, float4(v.uv.xy * 2 - 1, 0, -1));
+					float3 viewVector = mul(unity_CameraInvProjection, float4(input.uv.xy * 2 - 1, 0, -1));
 					output.viewVector = mul(unity_CameraToWorld, float4(viewVector,0));
 					return output;
 			}

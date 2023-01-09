@@ -73,11 +73,11 @@ Shader "Custom/PostProcessing/edgedetection"
                 return edge;
             }
 
-            v2f vert (appdata v)
+            v2f vert (appdata input)
             {
                 v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                float2 uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.vertex = UnityObjectToClipPos(input.vertex);
+                float2 uv = TRANSFORM_TEX(input.uv, _MainTex);
 
                 o.uv[0] = uv + _MainTex_TexelSize.xy * half2(-1, -1);
                 o.uv[1] = uv + _MainTex_TexelSize.xy * half2(0, -1);

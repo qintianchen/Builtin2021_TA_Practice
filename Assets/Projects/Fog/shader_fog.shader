@@ -35,11 +35,11 @@ Shader "Unlit/shader_fog"
             sampler2D _MainTex;
             float4 _MainTex_ST;
 
-            v2f vert (appdata v)
+            v2f vert (appdata input)
             {
                 v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.vertex = UnityObjectToClipPos(input.vertex);
+                o.uv = TRANSFORM_TEX(input.uv, _MainTex);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }

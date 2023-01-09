@@ -34,11 +34,11 @@ Shader "Custom/shader_shadervariables"
 
             uniform float testVal;
 
-            v2f vert (appdata v)
+            v2f vert (appdata input)
             {
                 v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.vertex = UnityObjectToClipPos(input.vertex);
+                o.uv = TRANSFORM_TEX(input.uv, _MainTex);
                 return o;
             }
 

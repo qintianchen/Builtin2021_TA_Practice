@@ -37,12 +37,12 @@ Shader "Custom/shader_depthtoworld"
             float4 _MainTex_ST;
             sampler2D _CameraDepthTexture;
 
-            v2f vert (appdata v)
+            v2f vert (appdata input)
             {
                 v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.vertex = UnityObjectToClipPos(input.vertex);
                 o.positionCS = o.vertex;
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.uv = TRANSFORM_TEX(input.uv, _MainTex);
                 return o;
             }
 

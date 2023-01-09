@@ -41,13 +41,13 @@ Shader "Custom/PBR/shader_pbr"
             float _Roughness;
             // float4 _F0;
 
-            v2f vert (appdata v)
+            v2f vert (appdata input)
             {
                 v2f o;
-                o.positionCS = UnityObjectToClipPos(v.positionOS);
-                o.positionWS = mul(unity_ObjectToWorld, v.positionOS);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                o.normalWS = UnityObjectToWorldNormal(v.normalOS);
+                o.positionCS = UnityObjectToClipPos(input.positionOS);
+                o.positionWS = mul(unity_ObjectToWorld, input.positionOS);
+                o.uv = TRANSFORM_TEX(input.uv, _MainTex);
+                o.normalWS = UnityObjectToWorldNormal(input.normalOS);
                 return o;
             }
 
