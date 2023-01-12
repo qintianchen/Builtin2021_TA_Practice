@@ -1,4 +1,4 @@
-Shader "Custom/shader_shadervariables"
+Shader "Custom/shader_Skybox_lightdepth"
 {
     Properties
     {
@@ -6,7 +6,10 @@ Shader "Custom/shader_shadervariables"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags
+        {
+            "RenderType"="Opaque"
+        }
         LOD 100
 
         Pass
@@ -32,22 +35,20 @@ Shader "Custom/shader_shadervariables"
             sampler2D _MainTex;
             float4 _MainTex_ST;
 
-            uniform float testVal;
+            sampler2D _CameraDepthTexture;
+            float4 _CameraDepthTexture_ST;
 
-            v2f vert (appdata input)
+            v2f vert(appdata v)
             {
                 v2f o;
-                o.vertex = UnityObjectToClipPos(input.vertex);
-                o.uv = TRANSFORM_TEX(input.uv, _MainTex);
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 return o;
             }
 
-            half4 frag (v2f input) : SV_Target
+            fixed4 frag(v2f input) : SV_Target
             {
-                // fixed4 col = tex2D(_MainTex, i.uv);
-                testVal = 0.2;
-
-                half4 col = testVal;
+                fixed4 col = tex2D(_CameraDepthTexture, input.uv);
                 return col;
             }
             ENDCG

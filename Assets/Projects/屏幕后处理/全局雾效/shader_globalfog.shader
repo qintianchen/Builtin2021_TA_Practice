@@ -77,9 +77,9 @@ Shader "Custom/PostProcessing/globalfog"
         // 例如对于一个深色的木桶，附近的像素是白色的天空。由于开启了 MSAA，它会在边缘处（颜色来说是三角形的边处）进行平均
         // 导致深色木桶的边缘颜色变浅（融合了天空的颜色）
         // 但是该像素的深度值并不会改变，所以天空的颜色变成了雾色，但是这里的像素可能依然还是浅色
-        half4 frag(v2f i) : SV_Target
+        half4 frag(v2f input) : SV_Target
         {
-            float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv_depth);
+            float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, input.uv_depth);
             float linearDepth = Linear01Depth(depth);
 
             float fogDensity = linearDepth * _FogDensity;
@@ -87,7 +87,7 @@ Shader "Custom/PostProcessing/globalfog"
             fogDensity = saturate(fogDensity);
             fogDensity = pow(fogDensity, 0.5);
             
-            fixed4 finalColor = tex2D(_MainTex, i.uv);
+            fixed4 finalColor = tex2D(_MainTex, input.uv);
             finalColor.rgb = lerp(finalColor.rgb, _FogColor.rgb, fogDensity);
 
             return half4(finalColor.rgb, 1);

@@ -49,10 +49,10 @@ Shader "Custom/PostProcessing/verticalfog"
             return o;
         }
 
-        half4 frag(v2f i) : SV_Target
+        half4 frag(v2f input) : SV_Target
         {
-            float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv_depth);
-            float4 positionCS = float4(i.uv.x * 2 - 1, i.uv.y * 2 - 1, depth, 1);
+            float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, input.uv_depth);
+            float4 positionCS = float4(input.uv.x * 2 - 1, input.uv.y * 2 - 1, depth, 1);
             float4 positionVS = mul(_ProjectionInverse, positionCS);
             positionVS = positionVS / positionVS.w;
             float4 tmp = mul(_WorldToCameraInverse, positionVS);
@@ -62,7 +62,7 @@ Shader "Custom/PostProcessing/verticalfog"
             fogDensity = clamp(fogDensity* _FogDensity, 0, 0.5) ;
             fogDensity = pow(fogDensity, 5);
 
-            fixed4 finalColor = tex2D(_MainTex, i.uv);
+            fixed4 finalColor = tex2D(_MainTex, input.uv);
             finalColor.rgb = lerp(finalColor.rgb, _FogColor.rgb, fogDensity);
 
             return half4(finalColor.rgb, 1);

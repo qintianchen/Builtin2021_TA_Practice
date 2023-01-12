@@ -53,9 +53,9 @@ Shader "Custom/PostProcessing/brightnesssaturationandcontrast"
                 return o;
             }
 
-            half4 frag(v2f i) : SV_Target
+            half4 frag(v2f input) : SV_Target
             {
-                float2 uv = i.uv;
+                float2 uv = input.uv;
                 fixed4 originalColor = tex2D(_MainTex, uv);
 
                 float3 finalColor = originalColor.rgb;

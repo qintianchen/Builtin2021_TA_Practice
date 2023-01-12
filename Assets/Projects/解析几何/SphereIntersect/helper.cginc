@@ -15,7 +15,7 @@ int GetIntersectPointWithSphere(float3 position, float3 dir, float3 spherePositi
     const float tb = 2 * (a * m + b * n + c * o);
     const float tc = a * a + b * b + c * c - r * r;
 
-    const float z1 = tb * tb - 4 * ta * tc;
+    const float z1 = tb * tb - 4 * ta * tc; // b^2 - 4ac
 
     point1 = float3(0, 0, 0);
     point2 = float3(0, 0, 0);

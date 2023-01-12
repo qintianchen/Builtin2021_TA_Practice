@@ -12,9 +12,11 @@ Shader "Custom/shader_Skybox_single_scattering"
         _Height_Rayleigh("瑞利散射标定高度", float) = 8500
         _Scattering_H0_Mie("地表处米氏散射系数", vector) = (1, 1, 1)
         _Height_Mie("米氏散射标定高度", float) = 1200
-        _Anisotropy_Mie("米氏散射各向异性参数", float) = 0.65
+        [Slide(0, 1)]_Anisotropy_Mie("米氏散射各向异性参数", float) = 0.65
         _Absorption_H0_Mie("米氏散射吸收系数", vector) = (1, 1, 1)
         _Absorption_H0_Ozone("臭氧层吸收系数", vector) = (1, 1, 1)
+        
+        _TransmittanceLUT("透视率LUT", 2D) = "white" {}
     }
     SubShader
     {
@@ -25,6 +27,7 @@ Shader "Custom/shader_Skybox_single_scattering"
             #pragma fragment frag
 
             #include "UnityCG.cginc"
+            #include "UnityLightingCommon.cginc"
             #include "helper.cginc"
 
             struct appdata
@@ -54,6 +57,9 @@ Shader "Custom/shader_Skybox_single_scattering"
             float4 _Absorption_H0_Mie;
             float4 _Absorption_H0_Ozone;
 
+            sampler2D _TransmittanceLUT;
+            float4 _TransmittanceLUT_ST;
+
             v2f vert(appdata input)
             {
                 v2f output = (v2f)0;
@@ -68,50 +74,28 @@ Shader "Custom/shader_Skybox_single_scattering"
                 AtmosphereParam atmosphereParam;
                 atmosphereParam.planetRadius = _PlanetRadius;
                 atmosphereParam.atmosphereHeight = _AtmosphereHeight;
-                atmosphereParam.scatteringRate_h0_rayleigh = _ScatteringRate_H0_Rayleigh.xyz * 1e-6;
+                atmosphereParam.scatteringRate_h0_rayleigh = float3(5.802, 13.558, 33.1) * 1e-6;
                 atmosphereParam.height_rayleigh = _Height_Rayleigh;
-                atmosphereParam.scatteringRate_h0_mie = _Scattering_H0_Mie.xyz * 1e-6;
+                atmosphereParam.scatteringRate_h0_mie = float3(3.996, 3.996, 3.996) * 1e-6;
                 atmosphereParam.height_mie = _Height_Mie;
                 atmosphereParam.anisotropy_mie = _Anisotropy_Mie;
-                atmosphereParam.absorption_h0_mie = _Absorption_H0_Mie.xyz * 1e-6;
+                atmosphereParam.absorption_h0_mie = float3(4.4, 4.4, 4.4) * 1e-6;
                 atmosphereParam.absorption_h0_ozone = _Absorption_H0_Ozone;
 
-                float fov = _FOV / (UNITY_PI / 180);
+                float fov = _FOV * (UNITY_PI / 180);
                 float aspect = _Aspect;
                 float near = _ProjectionParams.y;
                 float2 positionSS = (input.positionSS / input.positionSS.w).xy;
 
                 // 当前像素的视线方向
-                // float3 viewDirWS = ScreenSpacetoViewDirWS(positionSS, fov, aspect, near);
-                float3 viewDirWS = normalize(input.positionWS);
+                float3 viewDirWS = ScreenSpacetoViewDirWS(positionSS, fov, aspect, near);
                 
-                if(viewDirWS.y < 0) return 0;
-                
-                float3 intersectPositionWS; // PlanetSpace 
-                float3 tmpFloat3;
-                int count = GetIntersectPointWithSphere(
-                    float3(0, 0, 0),
-                    viewDirWS,
-                    float3(0, -atmosphereParam.planetRadius, 0),
-                    atmosphereParam.planetRadius + atmosphereParam.atmosphereHeight,
-                    intersectPositionWS,
-                    tmpFloat3);
-
-                float stepCount = 64;
-                float3 step = (float3(0, 0, 0) - intersectPositionWS) / stepCount;
-                float ds = length(step);
+                if(dot(viewDirWS, _WorldSpaceLightPos0) > 0.9999) return _LightColor0;
+      
                 float3 finalColor = float3(0, 0, 0);
-                for (int i = 0; i < stepCount; i++)
-                {
-                    float3 position1 = intersectPositionWS + step * i;
-                    float3 position2 = position1 + step;
-                    finalColor += GetLightOfPath(position1, position2, ds, atmosphereParam);
-                }
-
-                float altitude = PositionWStoAltitude(float3(0, 20000, 0), atmosphereParam);
-                finalColor = float3(altitude / 60000.0, 0, 0);
-                finalColor = pow(finalColor, 2.2);
-
+                float eyePos = _WorldSpaceCameraPos;
+                finalColor = GetSkyView(atmosphereParam, eyePos, viewDirWS, normalize(_WorldSpaceLightPos0), _TransmittanceLUT);
+                
                 return half4(finalColor, 1);
             }
             ENDCG

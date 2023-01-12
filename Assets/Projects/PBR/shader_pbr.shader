@@ -90,11 +90,11 @@ Shader "Custom/PBR/shader_pbr"
                 return ggx1 * ggx2;
             }
 
-            half4 frag (v2f i) : SV_Target
+            half4 frag (v2f input) : SV_Target
             {
-                float2 uv = i.uv;
-                float3 positionWS = i.positionWS;
-                float3 normalWS = normalize(i.normalWS);
+                float2 uv = input.uv;
+                float3 positionWS = input.positionWS;
+                float3 normalWS = normalize(input.normalWS);
                 float3 cameraPositionWS = _WorldSpaceCameraPos;
                 
                 float3 lightDirWS = _WorldSpaceLightPos0; // 0, 0, -1

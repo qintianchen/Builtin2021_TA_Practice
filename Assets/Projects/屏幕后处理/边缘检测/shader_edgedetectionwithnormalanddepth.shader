@@ -75,19 +75,19 @@ Shader "Custom/PostProcessing/edgedetectionwithnormalanddepth"
                 return o;
             }
 
-            fixed4 frag(v2f i) : SV_Target
+            fixed4 frag(v2f input) : SV_Target
             {
-                float4 sample1 = tex2D(_CameraDepthNormalsTexture, i.uv[1]);
-                float4 sample2 = tex2D(_CameraDepthNormalsTexture, i.uv[2]);
-                float4 sample3 = tex2D(_CameraDepthNormalsTexture, i.uv[3]);
-                float4 sample4 = tex2D(_CameraDepthNormalsTexture, i.uv[4]);
+                float4 sample1 = tex2D(_CameraDepthNormalsTexture, input.uv[1]);
+                float4 sample2 = tex2D(_CameraDepthNormalsTexture, input.uv[2]);
+                float4 sample3 = tex2D(_CameraDepthNormalsTexture, input.uv[3]);
+                float4 sample4 = tex2D(_CameraDepthNormalsTexture, input.uv[4]);
 
                 float edge = 1;
 
                 edge *= CheckSame(sample1, sample2);
                 edge *= CheckSame(sample3, sample4);
 
-                float4 withEdgeColor = lerp(_EdgeColor, tex2D(_MainTex, i.uv[0]), edge);
+                float4 withEdgeColor = lerp(_EdgeColor, tex2D(_MainTex, input.uv[0]), edge);
                 fixed4 onlyEdgeColor = lerp(_EdgeColor, _BackgroundColor, edge);
 
                 return lerp(withEdgeColor, onlyEdgeColor, _EdgeOnly);

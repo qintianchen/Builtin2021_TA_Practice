@@ -94,7 +94,7 @@ Shader "Custom/shader_sampler_seperate"
                 return o;
             }
 
-            fixed4 frag (v2f i) : SV_Target
+            fixed4 frag (v2f input) : SV_Target
             {
                 // fixed4 col = tex2D(_MainTex, i.uv);
                 // col *= tex2D(_Tex1   , i.uv);
@@ -115,24 +115,24 @@ Shader "Custom/shader_sampler_seperate"
                 // col *= tex2D(_Tex16  , i.uv);
                 // col *= tex2D(_Tex17  , i.uv);
 
-                fixed4 col = _MainTex.Sample(sampler_MainTex, i.uv);
-                col *= _Tex1 .Sample(sampler_MainTex  , i.uv);
-                col *= _Tex2 .Sample(sampler_MainTex  , i.uv);
-                col *= _Tex3 .Sample(sampler_MainTex  , i.uv);
-                col *= _Tex4 .Sample(sampler_MainTex  , i.uv);
-                col *= _Tex5 .Sample(sampler_MainTex  , i.uv);
-                col *= _Tex6 .Sample(sampler_MainTex  , i.uv);
-                col *= _Tex7 .Sample(sampler_MainTex  , i.uv);
-                col *= _Tex8 .Sample(sampler_MainTex  , i.uv);
-                col *= _Tex9 .Sample(sampler_MainTex  , i.uv);
-                col *= _Tex10.Sample(sampler_MainTex  , i.uv);
-                col *= _Tex11.Sample(sampler_MainTex  , i.uv);
-                col *= _Tex12.Sample(sampler_MainTex  , i.uv);
-                col *= _Tex13.Sample(sampler_MainTex  , i.uv);
-                col *= _Tex14.Sample(sampler_MainTex  , i.uv);
-                col *= _Tex15.Sample(sampler_MainTex  , i.uv);
-                col *= _Tex16.Sample(sampler_MainTex  , i.uv);
-                col *= _Tex17.Sample(sampler_MainTex  , i.uv);
+                fixed4 col = _MainTex.Sample(sampler_MainTex, input.uv);
+                col *= _Tex1 .Sample(sampler_MainTex  , input.uv);
+                col *= _Tex2 .Sample(sampler_MainTex  , input.uv);
+                col *= _Tex3 .Sample(sampler_MainTex  , input.uv);
+                col *= _Tex4 .Sample(sampler_MainTex  , input.uv);
+                col *= _Tex5 .Sample(sampler_MainTex  , input.uv);
+                col *= _Tex6 .Sample(sampler_MainTex  , input.uv);
+                col *= _Tex7 .Sample(sampler_MainTex  , input.uv);
+                col *= _Tex8 .Sample(sampler_MainTex  , input.uv);
+                col *= _Tex9 .Sample(sampler_MainTex  , input.uv);
+                col *= _Tex10.Sample(sampler_MainTex  , input.uv);
+                col *= _Tex11.Sample(sampler_MainTex  , input.uv);
+                col *= _Tex12.Sample(sampler_MainTex  , input.uv);
+                col *= _Tex13.Sample(sampler_MainTex  , input.uv);
+                col *= _Tex14.Sample(sampler_MainTex  , input.uv);
+                col *= _Tex15.Sample(sampler_MainTex  , input.uv);
+                col *= _Tex16.Sample(sampler_MainTex  , input.uv);
+                col *= _Tex17.Sample(sampler_MainTex  , input.uv);
        
                 return col;
             }

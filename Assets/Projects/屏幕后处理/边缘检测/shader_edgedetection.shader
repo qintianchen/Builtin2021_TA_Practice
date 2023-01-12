@@ -92,11 +92,11 @@ Shader "Custom/PostProcessing/edgedetection"
                 return o;
             }
 
-            fixed4 frag (v2f i) : SV_Target
+            fixed4 frag (v2f input) : SV_Target
             {
-                half edge = saturate(Sobel(i)); // 得到的是每个像素的颜色梯度，但是这里要做 Saturate，因为这里如果不做 Saturate，Lerp 会在超出边界的地方插值出奇怪的颜色
+                half edge = saturate(Sobel(input)); // 得到的是每个像素的颜色梯度，但是这里要做 Saturate，因为这里如果不做 Saturate，Lerp 会在超出边界的地方插值出奇怪的颜色
 
-                fixed4 withEdgeColor = lerp(_EdgeColor, tex2D(_MainTex, i.uv[4]), edge);
+                fixed4 withEdgeColor = lerp(_EdgeColor, tex2D(_MainTex, input.uv[4]), edge);
                 fixed4 onlyEdgeColor = lerp(_EdgeColor, _BackgroundColor, edge);
                 return lerp(withEdgeColor, onlyEdgeColor, _EdgeOnly);
                 // return half4(edge, edge, edge, 1);

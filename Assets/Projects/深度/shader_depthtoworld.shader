@@ -46,12 +46,12 @@ Shader "Custom/shader_depthtoworld"
                 return o;
             }
 
-            half4 frag (v2f i) : SV_Target
+            half4 frag (v2f input) : SV_Target
             {
-                float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv);
+                float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, input.uv);
                 float w = LinearEyeDepth(depth);
 
-                float4 positionNDC = float4(i.uv.x * 2 - 1, i.uv.y * 2 - 1, depth, 1);
+                float4 positionNDC = float4(input.uv.x * 2 - 1, input.uv.y * 2 - 1, depth, 1);
                 float4 positionCS = positionNDC * w;
                 float4 positionWS = mul(_VP_Inverse, positionCS);
                 positionWS /= positionWS.w; // 这里为什么 w 不是 1

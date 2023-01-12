@@ -38,14 +38,21 @@ Shader "Custom/shader_sphereintersect_shader"
             float _PlanetRadius;
             float _AtmosphereRadius;
 
+            struct SS
+            {
+                float a;
+            };
+
+            SS ss;
+
             v2f vert(appdata input)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(input.vertex);
-                o.uv = input.uv;
+                o.uv = input.uv; // * ss.a;
                 return o;
             }
-
+            
             float4 frag(v2f i) : SV_Target
             {
                 float4 finalColor = 0;

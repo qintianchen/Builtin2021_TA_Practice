@@ -69,12 +69,12 @@ Shader "Custom/shader_depthtoworld2"
                 return o;
             }
 
-            half4 frag(v2f i) : SV_Target
+            half4 frag(v2f input) : SV_Target
             {
-                float3 vectorWS = i.vectorWS;
+                float3 vectorWS = input.vectorWS;
                 float3 cameraPositionWS = _WorldSpaceCameraPos;
                 float near = _ProjectionParams.y;
-                float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv);
+                float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, input.uv);
                 float depthVS = LinearEyeDepth(depth);
                 float3 ray = vectorWS * (depthVS / near);
                 float3 positionWS = ray + cameraPositionWS;

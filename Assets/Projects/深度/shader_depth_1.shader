@@ -44,9 +44,9 @@ Shader "Custom/shader_depth_1"
                 return o;
             }
 
-            half4 frag (v2f i) : SV_Target
+            half4 frag (v2f input) : SV_Target
             {
-                half4 positionNDC = i.positionCS / i.positionCS.w;
+                half4 positionNDC = input.positionCS / input.positionCS.w;
 
                 return half4(positionNDC.z, 0, 0, 1);
                 // return half4(i.positionCS.w, 0, 0, 1);

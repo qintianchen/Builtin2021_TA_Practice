@@ -51,10 +51,10 @@ Shader "Custom/PostProcessing/shader_motionblur2"
         }
 
         // fix: 实测当汽车倒退的时候，画面会出现严重的抖动现象，_BlurSize 越大越明显，原因未知
-        fixed4 frag(v2f i) : SV_Target
+        fixed4 frag(v2f input) : SV_Target
         {
-            float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv_depth);
-            float4 positionVS = float4(i.uv.x * 2 - 1, i.uv.y * 2 - 1, depth * 2 - 1, 1); // position In View Space
+            float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, input.uv_depth);
+            float4 positionVS = float4(input.uv.x * 2 - 1, input.uv.y * 2 - 1, depth * 2 - 1, 1); // position In View Space
             float4 tmp = mul(_CurrentViewProjectionInverseMatrix, positionVS);
             float4 positionWS = tmp / tmp.w;
 
@@ -64,7 +64,7 @@ Shader "Custom/PostProcessing/shader_motionblur2"
 
             float2 velocity = (currentPositionVS.xy - previousPositionVS.xy) / 2.0f;
 
-            float2 uv = i.uv;
+            float2 uv = input.uv;
             float4 c = tex2D(_MainTex, uv);
             uv += velocity * _BlurSize * _MainTex_TexelSize.xy * 24;
             for (int it = 1; it < 3; it++, uv += velocity * _BlurSize * _MainTex_TexelSize.xy * 24)

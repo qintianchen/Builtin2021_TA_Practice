@@ -1,0 +1,85 @@
+// 计算 Transmittance 的 lut
+// 星球的原点处于 (0, -planetRadius, 0)
+
+#pragma kernel CSMain
+
+#include "../helper.cginc"
+
+RWTexture2D<float4> Result;
+StructuredBuffer<AtmosphereParam> atmosphereParams;
+
+float3 GetRayleighScatteringRatio(AtmosphereParam param, float h)
+{
+    return param.scatteringRate_h0_rayleigh * exp(-h/param.height_rayleigh);
+}
+
+float3 GetMieScatteringRatio(AtmosphereParam param, float h)
+{
+    return param.scatteringRate_h0_mie * exp(-h/param.height_mie);
+}
+
+float3 GetMieAbsorption(AtmosphereParam param, float h)
+{
+    return param.absorption_h0_mie * exp(-h/param.height_mie);
+}
+
+float3 GetOzoneAbsoption(AtmosphereParam param, float h)
+{
+    float a = 1 - abs(h - param.ozoneCenter)/param.ozoneHeight;
+    return param.absorption_h0_ozone * max(0, a);
+}
+
+float3 GetTransmittance(float cos_theta, float altitude, AtmosphereParam param)
+{
+    float3 positionWS = float3(0, altitude, 0);
+    float3 dir = float3(sqrt(1 - cos_theta * cos_theta), cos_theta, 0);
+    
+    float3 intersectPoint;
+    float3 tempFloat3;
+    GetIntersectPointWithSphere(positionWS, dir, float3(0, -param.planetRadius, 0), param.planetRadius + param.atmosphereHeight, intersectPoint, tempFloat3);
+
+    float stepCount = 32;
+    float distance = length(intersectPoint - positionWS);
+    float ds = distance / stepCount;
+
+    float3 totalTransmittance = 0;
+    for (int i=0;i<stepCount;i++)
+    {
+        float curAltitude = length(positionWS + float3(0, param.planetRadius, 0) + dir * (i + 0.5) * ds) - param.planetRadius;        
+        
+        float3 sigma_t = GetRayleighScatteringRatio(param, curAltitude) + GetMieScatteringRatio(param, curAltitude) + GetMieAbsorption(param, curAltitude) + GetOzoneAbsoption(param, curAltitude);
+        float3 transmittance = exp(-sigma_t * ds);
+        totalTransmittance += transmittance;
+    }
+
+    return totalTransmittance;
+}
+
+[numthreads(8,8,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    AtmosphereParam param = atmosphereParams[0];
+
+    float width, height;
+    Result.GetDimensions(width, height);
+
+    float dr = 2.0 / width;
+    float dh = param.atmosphereHeight / height;
+
+    float cos_theta =-1 + dr * id.x;
+    float curAltitude = dh * id.y;
+
+    // if(cos_theta >= 0)
+    // {
+        // Result[id.xy] = float4(0, 1, 0, 1);
+        // return;
+    // }
+
+    float3 transmittance = GetTransmittance(cos_theta, curAltitude, param);
+    
+    Result[id.xy] = float4(transmittance, 1); 
+}
+
+
+
+
