@@ -1,4 +1,4 @@
-Shader "Custom/shader_Skybox_lightdepth"
+Shader "Custom/shader_lightdepth"
 {
     Properties
     {
@@ -38,6 +38,8 @@ Shader "Custom/shader_Skybox_lightdepth"
             sampler2D _CameraDepthTexture;
             float4 _CameraDepthTexture_ST;
 
+            RWTexture2D<float4> targetTexture;
+
             v2f vert(appdata v)
             {
                 v2f o;
@@ -49,6 +51,7 @@ Shader "Custom/shader_Skybox_lightdepth"
             fixed4 frag(v2f input) : SV_Target
             {
                 fixed4 col = tex2D(_CameraDepthTexture, input.uv);
+                // col = pow(col, 5);
                 return col;
             }
             ENDCG

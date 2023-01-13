@@ -10,7 +10,7 @@ public class Camera_LightDepthGenerater : MonoBehaviour
     public Material material;
 
     private void OnEnable()
-    {
+    { 
         GetComponent<Camera>().depthTextureMode = DepthTextureMode.Depth;
     }
 
